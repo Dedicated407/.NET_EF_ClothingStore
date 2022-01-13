@@ -1,9 +1,13 @@
-﻿namespace SunriseClothingStore;
+﻿using SunriseClothingStore.Models.Repositories;
+using SunriseClothingStore.Models.Repositories.Interfaces;
+
+namespace SunriseClothingStore;
 
 public class Startup
 {
     public void ConfigureServices(IServiceCollection services)
     {
+        services.AddScoped<IProductRepository, ProductRepository>();
         services.AddMvc();
     }
         
