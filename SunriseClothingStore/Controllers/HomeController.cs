@@ -15,7 +15,7 @@ public class HomeController : Controller
     }
     
     [HttpGet]
-    public ViewResult HomePage() => View(_productRepository);
+    public ViewResult HomePage() => View(_productRepository.Products as IQueryable<Product>);
 
     [HttpPost]
     public IActionResult AddProduct(Product product)

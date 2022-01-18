@@ -4,11 +4,18 @@ namespace SunriseClothingStore.Models.Repositories;
 
 public class ProductRepository : IProductRepository
 {
-    private List<Product> _products = new();
-    public IEnumerable<Product> Products => _products;
+    private readonly StoreContext _context;
+    public ProductRepository(StoreContext context) => _context = context;
     
+    public IEnumerable<Product> Products => _context.Products;
+
+    #region Add
+
     public void AddProduct(Product product)
     {
-        _products.Add(product);
+        _context.Products.Add(product);
+        _context.SaveChanges();
     }
+
+    #endregion
 }
