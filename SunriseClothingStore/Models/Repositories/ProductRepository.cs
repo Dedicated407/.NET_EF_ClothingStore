@@ -6,8 +6,6 @@ public class ProductRepository : IProductRepository
 {
     private readonly StoreContext _context;
     public ProductRepository(StoreContext context) => _context = context;
-    
-    public IEnumerable<Product> Products => _context.Products;
 
     #region Add
 
@@ -16,6 +14,27 @@ public class ProductRepository : IProductRepository
         _context.Products.Add(product);
         _context.SaveChanges();
     }
+
+    #endregion
+
+    #region Update
+
+    public void UpdateProduct(Product product)
+    {
+        _context.Products.Update(product);
+        _context.SaveChanges();
+    }
+
+    #endregion
+
+    #region Get
+
+    public Product GetProduct(Guid key)
+    {
+        return _context.Products.Find(key)!;
+    }
+
+    public IEnumerable<Product> Products => _context.Products;
 
     #endregion
 }
