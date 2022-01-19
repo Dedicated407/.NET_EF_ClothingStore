@@ -36,4 +36,11 @@ public class HomeController : Controller
         _productRepository.UpdateProduct(product);
         return RedirectToAction(nameof(HomePage));
     }
+
+    [HttpGet("Remove")]
+    public IActionResult RemoveProduct(Guid key)
+    {
+        _productRepository.RemoveProduct(key);
+        return RedirectToAction(nameof(HomePage));
+    }
 }

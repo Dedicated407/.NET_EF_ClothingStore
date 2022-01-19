@@ -6,4 +6,5 @@ public interface IProductRepository
     Product GetProduct(Guid key);
     void AddProduct(Product product);
     void UpdateProduct(Product product);
+    void RemoveProduct(Guid key);
 }

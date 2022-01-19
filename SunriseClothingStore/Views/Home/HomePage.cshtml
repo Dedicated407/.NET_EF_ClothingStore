@@ -59,7 +59,8 @@
                     <div class="col text-right">@product.SalePrice</div>
                     <div class="col text-right">@product.Quantity</div>
                     <div class="col">
-                        <a asp-action="UpdateProduct" asp-route-key="@product.Id" class="btn btn-primary m-2 px-5">Изменить</a>
+                        <a asp-action="UpdateProduct" asp-route-key="@product.Id" class="btn btn-primary m-1 px-4">Изменить</a>
+                        <a asp-action="RemoveProduct" asp-route-key="@product.Id" class="btn btn-danger m-1 px-4">Удалить</a>
                     </div>
                 </div>
             }

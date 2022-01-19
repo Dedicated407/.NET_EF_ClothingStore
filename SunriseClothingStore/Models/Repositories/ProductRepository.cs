@@ -37,4 +37,14 @@ public class ProductRepository : IProductRepository
     public IEnumerable<Product> Products => _context.Products;
 
     #endregion
+
+    #region Remove
+
+    public void RemoveProduct(Guid key)
+    {
+        _context.Products.Remove(GetProduct(key));
+        _context.SaveChanges();
+    }
+
+    #endregion
 }
