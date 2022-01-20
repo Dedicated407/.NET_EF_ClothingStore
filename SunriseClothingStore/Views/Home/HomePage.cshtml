@@ -5,7 +5,7 @@
 }
 
 <section>
-    <a class="btn btn-primary m-2 px-5" asp-action="HomePage">Обновить</a>
+    <h3 class="p-2 bg-primary text-white text-center">Товары</h3>
 
     <div class="container-fluid mt-3">
         <div class="row">
@@ -17,30 +17,7 @@
             <div class="col font-weight-bold text-right">Количество</div>
             <div class="col"></div>
         </div>
-        <form asp-action="AddProduct" method="post">
-            <div class="row p-2">
-                <div class="col-1"></div>
-                <div class="col">
-                    <input name="Name" class="form-control"/>
-                </div>
-                <div class="col">
-                    <input name="Category" class="form-control"/>
-                </div>
-                <div class="col">
-                    <input name="PurchasePrice" class="form-control"/>
-                </div>
-                <div class="col">
-                    <input name="SalePrice" class="form-control"/>
-                </div>
-                <div class="col">
-                    <input name="Quantity" class="form-control"/>
-                </div>
-                <div class="col">
-                    <button type="submit" class="btn btn-primary px-5">Добавить</button>
-                </div>
-            </div>
-        </form>
-
+        
         @if (!Model.Any())
         {
             <div class="row">
@@ -49,12 +26,12 @@
         }
         else
         {
-            @foreach (var product in Model)
+            @foreach (Product product in Model)
             {
                 <div class="row р-2">
                     <div class="col">@product.Id</div>
                     <div class="col">@product.Name</div>
-                    <div class="col">@product.Category</div>
+                    <div class="col">@product.Category.Name</div>
                     <div class="col text-right">@product.PurchasePrice</div>
                     <div class="col text-right">@product.SalePrice</div>
                     <div class="col text-right">@product.Quantity</div>
@@ -65,6 +42,12 @@
                 </div>
             }
         }
+    </div>
+    
+    <div class="text-center p-2">
+        <a asp-action="UpdateProduct" class="btn btn-primary">
+            Добавить
+        </a>
     </div>
 
 </section>

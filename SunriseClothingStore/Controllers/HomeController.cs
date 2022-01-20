@@ -4,38 +4,47 @@ using SunriseClothingStore.Models.Repositories.Interfaces;
 
 namespace SunriseClothingStore.Controllers;
 
-[Route("Home")]
+[Route("Product")]
 public class HomeController : Controller
 {
     private readonly IProductRepository _productRepository;
+    private readonly ICategoryRepository _categoryRepository;
 
-    public HomeController(IProductRepository repository)
+    public HomeController(IProductRepository productRepository, ICategoryRepository categoryRepository )
     {
-        _productRepository = repository;
+        _productRepository = productRepository;
+        _categoryRepository = categoryRepository;
     }
 
-    [HttpGet]
-    public ViewResult HomePage() => View(_productRepository.Products as IQueryable<Product>);
+    [HttpGet("/")]
+    public ViewResult HomePage() => View(_productRepository.Products);
 
-    [HttpPost]
-    public IActionResult AddProduct(Product product)
-    {
-        _productRepository.AddProduct(product);
-        return RedirectToAction(nameof(HomePage));
-    }
-
+    #region Update
+    
     [HttpGet("Update")]
     public IActionResult UpdateProduct(Guid key)
     {
-        return View(_productRepository.GetProduct(key));
+        ViewBag.Categories = _categoryRepository.Categories;
+        return View(key == Guid.Empty ? new Product() : _productRepository.FindProduct(key));
     }
 
     [HttpPost("Update")]
     public IActionResult UpdateProduct(Product product)
     {
-        _productRepository.UpdateProduct(product);
+        if (product.Id == Guid.Empty)
+        {
+            _productRepository.AddProduct(product);
+        }
+        else
+        {
+            _productRepository.UpdateProduct(product);
+        }
         return RedirectToAction(nameof(HomePage));
     }
+    
+    #endregion
+
+    #region Remove
 
     [HttpGet("Remove")]
     public IActionResult RemoveProduct(Guid key)
@@ -43,4 +52,6 @@ public class HomeController : Controller
         _productRepository.RemoveProduct(key);
         return RedirectToAction(nameof(HomePage));
     }
+
+    #endregion
 }
