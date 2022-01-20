@@ -1,10 +1,7 @@
 ﻿using SunriseClothingStore.Models;
 using SunriseClothingStore.Models.Repositories;
 using SunriseClothingStore.Models.Repositories.Interfaces;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.Configuration;
 using Microsoft.EntityFrameworkCore;
-using Npgsql;
 
 namespace SunriseClothingStore;
 
@@ -20,6 +17,7 @@ public class Startup
     {
         services.AddMvc();
         services.AddScoped<IProductRepository, ProductRepository>();
+        services.AddScoped<ICategoryRepository, CategoryRepository>();
         
         services.AddDbContext<StoreContext>(options => 
             options.UseNpgsql(_connectionString));

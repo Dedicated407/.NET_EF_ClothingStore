@@ -2,8 +2,8 @@
 
 public interface IProductRepository
 {
-    IEnumerable<Product> Products { get; }
-    Product GetProduct(Guid key);
+    IQueryable<Product> Products { get; }
+    Product FindProduct(Guid key);
     void AddProduct(Product product);
     void UpdateProduct(Product product);
     void RemoveProduct(Guid key);
