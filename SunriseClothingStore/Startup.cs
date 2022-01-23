@@ -18,6 +18,7 @@ public class Startup
         services.AddMvc();
         services.AddScoped<IProductRepository, ProductRepository>();
         services.AddScoped<ICategoryRepository, CategoryRepository>();
+        services.AddScoped<IOrderRepository, OrderRepository>();
         
         services.AddDbContext<StoreContext>(options => 
             options.UseNpgsql(_connectionString));

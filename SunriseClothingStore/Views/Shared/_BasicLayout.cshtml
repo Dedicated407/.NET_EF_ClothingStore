@@ -13,12 +13,15 @@
 
 <div class="container-fluid">
     <div class="row р-2">
-        <div class="col-2">
-            <a asp-controller="Home" asp-action="HomePage" class="@GetClassForButton("Home")">
+        <div class="col-1 p-2">
+            <a asp-controller="Home" asp-action="HomePage" class="m-2 @GetClassForButton("Home")">
                 Товары
             </a>
-            <a asp-controller="Categories" asp-action="CategoryPage" class="@GetClassForButton("Categories")">
+            <a asp-controller="Categories" asp-action="CategoryPage" class="m-2 @GetClassForButton("Categories")">
                 Категории
+            </a>
+            <a asp-controller="Orders" asp-action="Index" class="m-2 @GetClassForButton("Orders")">
+                Заказы
             </a>
         </div>
         <div class="col">
