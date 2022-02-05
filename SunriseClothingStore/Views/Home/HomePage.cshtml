@@ -1,4 +1,4 @@
-﻿@model IQueryable<Product>
+﻿@model IEnumerable<Product>
 
 @{
     ViewBag.Title = "Главная страница";
@@ -6,6 +6,15 @@
 
 <section>
     <h3 class="p-2 bg-primary text-white text-center">Товары</h3>
+    
+    <div class="text-center">
+        @Html.Partial("Pages", Model)
+        @{
+            ViewBag.searches = new[] { "Name", "Category.Name" };
+            ViewBag.sorts = new[] { "Name", "Category.Name", "PurchasePrice", "SalePrice" };
+        }
+        @Html.Partial("PageOptions", Model)
+    </div>
 
     <div class="container-fluid mt-3">
         <div class="row">

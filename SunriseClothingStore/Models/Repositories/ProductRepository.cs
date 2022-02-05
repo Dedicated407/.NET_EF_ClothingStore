@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using SunriseClothingStore.Models.Pages;
 using SunriseClothingStore.Models.Repositories.Interfaces;
 
 namespace SunriseClothingStore.Models.Repositories;
@@ -11,6 +12,11 @@ public class ProductRepository : IProductRepository
     public ProductRepository(StoreContext context) => _context = context;
 
     #region Find
+
+    public PagedList<Product> GetProducts(QueryOptions options)
+    {
+        return new PagedList<Product>(_context.Products.Include(p => p.Category), options);
+    }
 
     public Product FindProduct(Guid key)
     {

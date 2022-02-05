@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SunriseClothingStore.Models;
+using SunriseClothingStore.Models.Pages;
 using SunriseClothingStore.Models.Repositories.Interfaces;
 
 namespace SunriseClothingStore.Controllers;
@@ -10,14 +11,14 @@ public class HomeController : Controller
     private readonly IProductRepository _productRepository;
     private readonly ICategoryRepository _categoryRepository;
 
-    public HomeController(IProductRepository productRepository, ICategoryRepository categoryRepository )
+    public HomeController(IProductRepository productRepository, ICategoryRepository categoryRepository)
     {
         _productRepository = productRepository;
         _categoryRepository = categoryRepository;
     }
 
     [HttpGet("/")]
-    public ViewResult HomePage() => View(_productRepository.Products);
+    public ViewResult HomePage(QueryOptions options) => View(_productRepository.GetProducts(options));
 
     #region Update
     

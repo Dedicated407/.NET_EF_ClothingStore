@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SunriseClothingStore.Models;
+using SunriseClothingStore.Models.Pages;
 using SunriseClothingStore.Models.Repositories.Interfaces;
 
 namespace SunriseClothingStore.Controllers;
@@ -15,7 +16,7 @@ public class CategoriesController : Controller
     }
 
     [HttpGet]
-    public ViewResult CategoryPage() => View(_categoryRepository.Categories);
+    public ViewResult CategoryPage(QueryOptions options) => View(_categoryRepository.GetCategories(options));
 
     
     public IActionResult EditCategory(Guid id)

@@ -1,4 +1,4 @@
-﻿@model IQueryable<Category>
+﻿@model IEnumerable<Category>
 
 @{
     ViewBag.Title = "Категории";
@@ -6,6 +6,16 @@
 
 <div>
     <h3 class="p-2 bg-primary text-white text-center">Категории</h3>
+
+    <div class="text-center">
+        @Html.Partial("Pages", Model)
+        @{
+            ViewBag.searches = new[] { "Name", "Description" };
+            ViewBag.sorts = new[] { "Name", "Description" };
+        }
+        @Html.Partial("PageOptions", Model)
+    </div>
+    
     <div class="container-fluid mt-3">
         <div class="row">
             <div class="col-1 font-weight-bold">Id</div>

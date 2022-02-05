@@ -1,4 +1,5 @@
-﻿using SunriseClothingStore.Models.Repositories.Interfaces;
+﻿using SunriseClothingStore.Models.Pages;
+using SunriseClothingStore.Models.Repositories.Interfaces;
 
 namespace SunriseClothingStore.Models.Repositories;
 
@@ -12,6 +13,11 @@ public class CategoryRepository : ICategoryRepository
     public Category FindCategory(Guid key)
     {
         return _context.Categories.Find(key);
+    }
+
+    public PagedList<Category> GetCategories(QueryOptions options)
+    {
+        return new PagedList<Category>(_context.Categories, options);
     }
 
     public void AddCategory(Category category)
