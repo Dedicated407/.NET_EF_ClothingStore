@@ -1,0 +1,23 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width"/>
+    <link rel="stylesheet" href="lib/bootstrap/css/bootstrap.min.css"/>
+    <title>Магазин Sunrise</title>
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row bg-dark p-4 text-white">
+        <div class="col-auto">
+            <h4>Магазин Sunrise</h4>
+        </div>
+        <div class="col"></div>
+        <div class="col-auto text-end">
+            @* @await Component.InvokeAsync("Cart", Context.Session); *@
+        </div>
+    </div>
+</div>
+@RenderBody()
+</body>
+</html>

@@ -1,0 +1,59 @@
+﻿@model IEnumerable<Category>
+
+@{
+    ViewBag.Title = "Категории";
+}
+
+<section>
+    <h3 class="p-2 bg-primary text-white text-center">Категории</h3>
+
+    <div class="text-center">
+        @Html.Partial("Pages", Model)
+        @{
+            ViewBag.searches = new[] { "Имя", "Описание" };
+            ViewBag.sorts = new[] { "Имя", "Описание" };
+        }
+        @Html.Partial("PageOptions", Model)
+    </div>
+
+    <div class="container mt-3">
+        <div class="row">
+            <div class="col-1 font-weight-bold">Id</div>
+            <div class="col font-weight-bold">Имя</div>
+            <div class="col font-weight-bold">Описание</div>
+            <div class="col-3"></div>
+        </div>
+        @if (ViewBag.EditId == null)
+        {
+            <form asp-action="AddCategory" method="post">
+                @Html.Partial("CategoryEditor", new Category())
+            </form>
+        }
+        @foreach (Category category in Model)
+        {
+            @if (category.Id == ViewBag.EditId)
+            {
+                <form asp-action="UpdateCategory" method="post">
+                    <input type="hidden" name="Id" value="@category.Id"/>
+                    @Html.Partial("CategoryEditor", category)
+                </form>
+            }
+            else
+            {
+                <div class="row p-2">
+                    <div class="col-1">@category.Id</div>
+                    <div class="col">@category.Name</div>
+                    <div class="col">@category.Description</div>
+                    <div class="col">
+                        <a asp-action="EditCategory" asp-route-id="@category.Id" class="btn btn-outline-primary">
+                            Изменить
+                        </a>
+                        <a asp-action="RemoveCategory" asp-route-key="@category.Id" class="btn btn-outline-danger">
+                            Удалить
+                        </a>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+</section>

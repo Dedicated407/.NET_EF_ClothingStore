@@ -1,0 +1,55 @@
+﻿@model IQueryable<Order>
+
+@{
+    ViewBag.Title = "Страница заказа";
+}
+<section>
+    <h3 class="p-2 bg-primary text-white text-center">Заказы</h3>
+
+    <div class="container-fluid mt-3">
+        <div class="row">
+            <div class="col-1 font-weight-bold">Id</div>
+            <div class="col font-weight-bold">Имя заказчика</div>
+            <div class="col font-weight-bold">Почтовый код</div>
+            <div class="col font-weight-bold">Всего</div>
+            <div class="col font-weight-bold">Стоимость продажи</div>
+            <div class="col-1 font-weight-bold">Статус</div>
+            <div class="col-3"></div>
+        </div>
+        @if (!Model.Any())
+        {
+            <div class="col-12 text-center">
+                <h5>Нет заказов</h5>
+            </div>
+        }
+        @foreach (Order order in Model)
+        {
+            <div class="row р-2">
+                <div class="col-1">@order.Id</div>
+                <div class="col">@order.CustomerName</div>
+                <div class="col">@order.ZipCode</div>
+                <div class="col">
+                    @order.Lines.Sum(line => line.Quantity * line.Product.SalePrice)
+                </div>
+                <div class="col">
+                    @order.Lines.Sum(line => line.Quantity * (line.Product.SalePrice - line.Product.PurchasePrice))
+                </div>
+                <div class="col-1">
+                    @(order.Shipped
+                        ? "Отправлено"
+                        : "Ожидает")
+                </div>
+                <div class="col-3 text-end">
+                    <form asp-action="RemoveOrder" method="post">
+                        <input type="hidden" name="Id" value="@order.Id"/>
+                        <a asp-action="EditOrder" asp-route-id="@order.Id" class="btn btn-outline-primary">Изменить</a>
+                        <button type="submit" class="btn btn-outline-danger">Удалить</button>
+                    </form>
+                </div>
+            </div>
+        }
+    </div>
+    <div class="text-center">
+        <a asp-action="EditOrder" class="btn btn-primary">Создать</a>
+    </div>
+</section>

@@ -1,0 +1,42 @@
+﻿@model PagedList<Category>
+<div class="container-fluid mt-4">
+    <div class="row g-0">
+        <div class="col mt-1">
+            <button form="page form" name="category" value="0" type="submit"
+                    class="btn col-12 @(ViewBag.SelectedCategory == null ? "btn-primary" : "btn-outline-primary")">
+                Все
+            </button>
+        </div>
+    </div>
+    <div class="row g-0 mt-4"></div>
+    <div class="row g-0">
+        <div class="col mt-1">
+            <button form="page form" name="categoryoptions.currentPage" value="@(Model.CurrentPage - 1)"
+                    class="btn col-12 btn-outline-secondary @(!Model.HasPreviousPage ? "disabled" : "")" type="submit">
+                Предыдущая
+            </button>
+        </div>
+    </div>
+    
+    @foreach (Category category in Model)
+    {
+        <div class="row g-0">
+            <div class="col mt-1">
+                <button form="page form" name="category" value="@category.Name" type="submit"
+                        class="btn col-12 @(ViewBag.SelectedCategory == category.Name 
+                                              ? "btn-primary" : "btn-outline-primary")">
+                    @category.Name
+                </button>
+            </div>
+        </div>
+    }
+    <div class="row g-0">
+        <div class="col mt-1">
+            <button form="page form"
+                    name="categoryoptions.currentPage" value="@(Model.CurrentPage + 1)"
+                    class="btn col-12 btn-outline-secondary @(!Model.HasNextPage ? "disabled" : "")" type="submit">
+                Следующая
+            </button>
+        </div>
+    </div>
+</div>

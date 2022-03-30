@@ -1,7 +1,13 @@
-﻿namespace SunriseClothingStore.Models.Repositories.Interfaces;
+﻿using SunriseClothingStore.Models.Pages;
+
+namespace SunriseClothingStore.Models.Repositories.Interfaces;
 
 public interface IProductRepository
 {
-    IEnumerable<Product> Products { get; }
+    IQueryable<Product> Products { get; }
+    PagedList<Product> GetProducts(QueryOptions options, string? categoryName = null);
+    Product FindProduct(Guid key);
     void AddProduct(Product product);
+    void UpdateProduct(Product product);
+    void RemoveProduct(Guid key);
 }

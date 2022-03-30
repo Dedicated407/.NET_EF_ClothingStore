@@ -1,9 +1,64 @@
-﻿@model IProductRepository
+﻿@model IEnumerable<Product>
 
 @{
     ViewBag.Title = "Главная страница";
 }
 
 <section>
-    <a class="btn btn-primary m-2 px-5" asp-action="HomePage">Домой</a>
+    <h3 class="p-2 bg-primary text-white text-center">Товары</h3>
+    
+    <div class="text-center">
+        @Html.Partial("Pages", Model)
+        @{
+            ViewBag.searches = new[] { "Имя", "Категория" };
+            ViewBag.sorts = new[] { "Имя", "Категория", "Стоимость покупки", "Стоимость продажи" };
+        }
+        @Html.Partial("PageOptions", Model)
+    </div>
+
+    <div class="container-fluid mt-3">
+        <div class="row">
+            <div class="col-1 font-weight-bold">Id</div>
+            <div class="col font-weight-bold">Имя</div>
+            <div class="col font-weight-bold">Категория</div>
+            <div class="col font-weight-bold text-right">Стоимость покупки</div>
+            <div class="col font-weight-bold text-right">Стоимость продажи</div>
+            <div class="col font-weight-bold text-right">Количество</div>
+            <div class="col font-weight-bold text-right">Описание</div>
+            <div class="col"></div>
+        </div>
+        
+        @if (!Model.Any())
+        {
+            <div class="row">
+                <div class="col text-center p-2">Пока в БД пусто</div>
+            </div>
+        }
+        else
+        {
+            @foreach (Product product in Model)
+            {
+                <div class="row р-2">
+                    <div class="col">@product.Id</div>
+                    <div class="col">@product.Name</div>
+                    <div class="col">@product.Category.Name</div>
+                    <div class="col text-right">@product.PurchasePrice</div>
+                    <div class="col text-right">@product.SalePrice</div>
+                    <div class="col text-right">@product.Quantity</div>
+                    <div class="col text-right">@product.Description</div>
+                    <div class="col">
+                        <a asp-action="UpdateProduct" asp-route-key="@product.Id" class="btn btn-primary m-1 px-4">Изменить</a>
+                        <a asp-action="RemoveProduct" asp-route-key="@product.Id" class="btn btn-danger m-1 px-4">Удалить</a>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+    
+    <div class="text-center p-2">
+        <a asp-action="UpdateProduct" class="btn btn-primary">
+            Добавить
+        </a>
+    </div>
+
 </section>

@@ -1,20 +1,54 @@
 ﻿<!DOCTYPE html>
 <html lang="ru">
-  <head>
+<head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>@ViewBag.Title</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.min.css" />
-  </head>
+    <link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.min.css"/>
+</head>
 
-  <body>
-  <header>
-  </header>
+<body>
 
-    <main>
-      @RenderBody()
-    </main>
+<header>
+</header>
 
-    <footer>
-    </footer>
-  </body>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-1 p-4">
+            <div class="row">
+                <a asp-controller="Home" asp-action="HomePage" class="m-2 @GetClassForButton("Home")">
+                    Товары
+                </a>
+                <a asp-controller="Categories" asp-action="CategoryPage" class="m-2 @GetClassForButton("Categories")">
+                    Категории
+                </a>
+                <a asp-controller="Orders" asp-action="Index" class="m-2 @GetClassForButton("Orders")">
+                    Заказы
+                </a>
+                <a asp-controller="Store" asp-action="Index" class="m-2 @GetClassForButton("Store")">
+                    Магазин
+                </a>
+            </div>
+        </div>
+        <div class="col-sm-11">
+            <div class="row">
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer>
+</footer>
+
+</body>
 </html>
+
+@functions
+{
+    string GetClassForButton(string controller)
+    {
+        return "btn btn-block " + (ViewContext.RouteData.Values["controller"] as string == controller
+            ? "btn-primary"
+            : "btn-outline-primary");
+    }
+}
