@@ -4,6 +4,7 @@ using SunriseClothingStore.Models.Repositories.Interfaces;
 
 namespace SunriseClothingStore.Controllers;
 
+[ApiExplorerSettings(IgnoreApi=true)]
 [Route("Order")]
 public class OrdersController : Controller
 {

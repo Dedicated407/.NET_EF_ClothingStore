@@ -5,6 +5,7 @@ using SunriseClothingStore.Models.Repositories.Interfaces;
 
 namespace SunriseClothingStore.Controllers;
 
+[ApiExplorerSettings(IgnoreApi=true)]
 [Route("Category")]
 public class CategoriesController : Controller
 {
@@ -18,7 +19,7 @@ public class CategoriesController : Controller
     [HttpGet]
     public ViewResult CategoryPage(QueryOptions options) => View(_categoryRepository.GetCategories(options));
 
-    
+    [ApiExplorerSettings(IgnoreApi=true)]
     public IActionResult EditCategory(Guid id)
     {
         ViewBag.EditId = id;
