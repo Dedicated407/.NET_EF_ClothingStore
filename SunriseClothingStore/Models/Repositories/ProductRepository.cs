@@ -23,6 +23,11 @@ public class ProductRepository : IProductRepository
         return new PagedList<Product>(query, options);
     }
 
+    public IQueryable<Product> GetAllProducts()
+    {
+        return _context.Products;
+    }
+
     public Product FindProduct(Guid key)
     {
         return _context.Products.Include(product => product.Category)

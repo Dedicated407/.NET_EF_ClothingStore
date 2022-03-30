@@ -7,6 +7,7 @@ using SunriseClothingStore.Models.Repositories.Interfaces;
 
 namespace SunriseClothingStore.Controllers;
 
+[ApiExplorerSettings(IgnoreApi=true)]
 [Route("Cart")]
 public class CartController : Controller
 {
@@ -38,7 +39,7 @@ public class CartController : Controller
         return RedirectToAction(nameof(Index), new { returnUri });
     }
 
-    [ApiExplorerSettings(IgnoreApi=true)]
+    
     public IActionResult CreateOrder() => View();
 
     [HttpPost("CreateOrder")]
@@ -51,14 +52,14 @@ public class CartController : Controller
         return RedirectToAction(nameof(Completed));
     }
 
-    [ApiExplorerSettings(IgnoreApi=true)]
+   
     public IActionResult Completed() => View();
     
     private Cart GetCart() => HttpContext.Session.GetJson<Cart>("Cart") ?? new Cart();
 
     private void SaveCart(Cart cart) => HttpContext.Session.SetJson("Cart", cart);
 
-    [ApiExplorerSettings(IgnoreApi=true)]
+    
     public IViewComponentResult Invoke(ISession session) =>
         new ViewViewComponentResult
         {

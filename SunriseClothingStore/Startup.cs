@@ -28,6 +28,7 @@ public class Startup
         services.AddScoped<IProductRepository, ProductRepository>();
         services.AddScoped<ICategoryRepository, CategoryRepository>();
         services.AddScoped<IOrderRepository, OrderRepository>();
+        services.AddScoped<IWebServiceRepository, WebServiceRepository>();
         
         services.AddDbContext<StoreContext>(options => 
             options.UseNpgsql(_connectionString));
