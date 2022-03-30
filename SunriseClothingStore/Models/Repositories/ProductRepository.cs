@@ -13,9 +13,14 @@ public class ProductRepository : IProductRepository
 
     #region Find
 
-    public PagedList<Product> GetProducts(QueryOptions options)
+    public PagedList<Product> GetProducts(QueryOptions options, string? categoryName = null)
     {
-        return new PagedList<Product>(_context.Products.Include(p => p.Category), options);
+        IQueryable<Product> query = _context.Products.Include(p => p.Category);
+        if (categoryName != null)
+        {
+            query = query.Where(p => p.Category.Name.Equals(categoryName));
+        }
+        return new PagedList<Product>(query, options);
     }
 
     public Product FindProduct(Guid key)

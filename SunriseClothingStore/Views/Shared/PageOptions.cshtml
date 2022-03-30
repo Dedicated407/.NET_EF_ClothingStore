@@ -5,7 +5,7 @@
             <label class="col-form-label">Поиск</label>
         </div>
         <div class="col-3">
-            <select form="pageform" name="options.searchpropertyname"
+            <select form="page form" name="options.searchpropertyname"
                     class="form-control">
                 @foreach (string s in ViewBag.searches as string[])
                 {
@@ -19,12 +19,12 @@
             </select>
         </div>
         <div class="col">
-            <input form="pageform" class="form-control"
+            <input form="page form" class="form-control"
                    name="options.searchterm"
                    value="@Model.Options.SearchTerm" />
         </div>
         <div class="col-1 text-right">
-            <button form="pageform" class="btn btn-secondary" type="submit">
+            <button form="page form" class="btn btn-secondary" type="submit">
                 Поиск
             </button>
         </div>
@@ -36,7 +36,7 @@
             <label class="col-form-label">Сортировать</label>
         </div>
         <div class="col-3">
-            <select form="pageform" name="options.OrderPropertyName"
+            <select form="page form" name="options.OrderPropertyName"
                     class="form-control">
                 @foreach (string s in ViewBag.sorts as string[])
                 {
@@ -49,14 +49,14 @@
             </select>
         </div>
         <div class="col form-check form-check-inline">
-            <input form="pageform" type="checkbox" name="Options.DescendingOrder"
+            <input form="page form" type="checkbox" name="Options.DescendingOrder"
                    id="Options.DescendingOrder"
                    class="form-check-input" value="true"
                    checked="@Model.Options.DescendingOrder"/>
             <label class="form-check-label">В порядке убывания</label>
         </div>
         <div class="col-1 text-end">
-            <button form="pageform" class="btn btn-secondary" type="submit">
+            <button form="page form" class="btn btn-secondary" type="submit">
                 Сортировать
             </button>
         </div>

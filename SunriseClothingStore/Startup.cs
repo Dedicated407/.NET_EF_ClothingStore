@@ -23,6 +23,12 @@ public class Startup
         services.AddDbContext<StoreContext>(options => 
             options.UseNpgsql(_connectionString));
         
+        services.AddSession(options =>
+        {
+            options.Cookie.Name = "SunriseClothingStore.session";
+            options.IdleTimeout = TimeSpan.FromHours(24);
+            options.Cookie.HttpOnly = false;
+        });
     }
         
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

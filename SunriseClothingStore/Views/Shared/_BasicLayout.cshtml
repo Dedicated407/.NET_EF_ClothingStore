@@ -12,20 +12,27 @@
 </header>
 
 <div class="container-fluid">
-    <div class="row р-2">
-        <div class="col-1 p-2">
-            <a asp-controller="Home" asp-action="HomePage" class="m-2 @GetClassForButton("Home")">
-                Товары
-            </a>
-            <a asp-controller="Categories" asp-action="CategoryPage" class="m-2 @GetClassForButton("Categories")">
-                Категории
-            </a>
-            <a asp-controller="Orders" asp-action="Index" class="m-2 @GetClassForButton("Orders")">
-                Заказы
-            </a>
+    <div class="row">
+        <div class="col-sm-1 p-4">
+            <div class="row">
+                <a asp-controller="Home" asp-action="HomePage" class="m-2 @GetClassForButton("Home")">
+                    Товары
+                </a>
+                <a asp-controller="Categories" asp-action="CategoryPage" class="m-2 @GetClassForButton("Categories")">
+                    Категории
+                </a>
+                <a asp-controller="Orders" asp-action="Index" class="m-2 @GetClassForButton("Orders")">
+                    Заказы
+                </a>
+                <a asp-controller="Store" asp-action="Index" class="m-2 @GetClassForButton("Store")">
+                    Магазин
+                </a>
+            </div>
         </div>
-        <div class="col">
-            @RenderBody()
+        <div class="col-sm-11">
+            <div class="row">
+                @RenderBody()
+            </div>
         </div>
     </div>
 </div>

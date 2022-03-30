@@ -1,0 +1,70 @@
+﻿@model Cart
+
+@{
+    Layout = "~/Views/Store/_Layout.cshtml";
+}
+
+<section>
+    <h2 class="m-3">Ваша корзина</h2>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col fw-bold">Количество</div>
+            <div class="col fw-bold">Товар</div>
+            <div class="col fw-bold">Цена</div>
+            <div class="col fw-bold">Общая стоимость</div>
+            <div class="col"></div>
+        </div>
+        @if (!Model.Selections.Any())
+        {
+            <div class="row mt-2">
+                <div class="col-12">
+                    <h4>Корзина пуста</h4>
+                </div>
+            </div>
+        }
+        else
+        {
+            @foreach (OrderLine line in Model.Selections)
+            {
+                <div class="row mt-1">
+                    <div class="col">@line.Quantity</div>
+                    <div class="col">@line.Product.Name</div>
+                    <div class="col text-end">
+                        @line.Product.SalePrice.ToString("F"))₽
+                    </div>
+                    <div class="col text-end">
+                        @((line.Product.SalePrice * line.Quantity).ToString("F"))₽
+                    </div>
+                    <div class="col">
+                        <form asp-action="RemoveFromCart">
+                            <button type="submit" name="productId" value="@line.ProductId"
+                                    class="btn btn-sm btn-outline-danger">
+                                Убрать из корзины
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            }
+        }
+        <div class="row mt-2">
+            <div class="col"></div>
+            <div class="col"></div>
+            <div class="col text-end fw-bold">Итог:</div>
+            <div class="col text-end fw-bold">
+                @(Model.Selections.Sum(line => line.Product.SalePrice * line.Quantity).ToString("F"))₽
+            </div>
+            <div class="col"></div>
+        </div>
+    </div>
+    <div class="text-center m-2">
+        @if (ViewBag.returnUrl != null)
+        {
+            <a href="@ViewBag.returnUrl" class="btn btn-outline-primary">
+                Продолжить покупки
+            </a>
+        }
+        <a asp-action="CreateOrder" class="btn btn-primary">
+            Оформить заказ
+        </a>
+    </div>
+</section>

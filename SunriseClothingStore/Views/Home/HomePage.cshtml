@@ -10,8 +10,8 @@
     <div class="text-center">
         @Html.Partial("Pages", Model)
         @{
-            ViewBag.searches = new[] { "Name", "Category.Name" };
-            ViewBag.sorts = new[] { "Name", "Category.Name", "PurchasePrice", "SalePrice" };
+            ViewBag.searches = new[] { "Имя", "Категория" };
+            ViewBag.sorts = new[] { "Имя", "Категория", "Стоимость покупки", "Стоимость продажи" };
         }
         @Html.Partial("PageOptions", Model)
     </div>
@@ -24,6 +24,7 @@
             <div class="col font-weight-bold text-right">Стоимость покупки</div>
             <div class="col font-weight-bold text-right">Стоимость продажи</div>
             <div class="col font-weight-bold text-right">Количество</div>
+            <div class="col font-weight-bold text-right">Описание</div>
             <div class="col"></div>
         </div>
         
@@ -44,6 +45,7 @@
                     <div class="col text-right">@product.PurchasePrice</div>
                     <div class="col text-right">@product.SalePrice</div>
                     <div class="col text-right">@product.Quantity</div>
+                    <div class="col text-right">@product.Description</div>
                     <div class="col">
                         <a asp-action="UpdateProduct" asp-route-key="@product.Id" class="btn btn-primary m-1 px-4">Изменить</a>
                         <a asp-action="RemoveProduct" asp-route-key="@product.Id" class="btn btn-danger m-1 px-4">Удалить</a>

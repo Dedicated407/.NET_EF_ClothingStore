@@ -1,0 +1,15 @@
+﻿@model Cart
+@if (Model?.Selections?.Count() > 0)
+{
+    <div>
+        @Model.Selections.Count() шт.,
+        @(Model.Selections.Sum(line => line.Quantity * line.Product.SalePrice).ToString("F"))₽
+    </div>
+    if (ViewContext.RouteData.Values["controller"] as string != "Cart")
+    {
+        <a asp-action="Index" asp-controller="Cart"
+           class="btn btn-sm btn-light">
+            Проверка
+        </a>
+    }
+}
