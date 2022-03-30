@@ -2,6 +2,7 @@
 using SunriseClothingStore.Models.Repositories;
 using SunriseClothingStore.Models.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
 
 namespace SunriseClothingStore;
 
@@ -16,6 +17,14 @@ public class Startup
     public void ConfigureServices(IServiceCollection services)
     {
         services.AddMvc();
+        services.AddSwaggerGen(options =>
+        {
+            options.SwaggerDoc("v1", new OpenApiInfo
+            {
+                Title = "Sunrise API", Version = "v1"
+            });
+        });
+
         services.AddScoped<IProductRepository, ProductRepository>();
         services.AddScoped<ICategoryRepository, CategoryRepository>();
         services.AddScoped<IOrderRepository, OrderRepository>();
@@ -36,6 +45,8 @@ public class Startup
         if (env.IsDevelopment())
         {
             app.UseDeveloperExceptionPage();
+            app.UseSwagger();
+            app.UseSwaggerUI();
         }
         app.UseStatusCodePages();
 
@@ -45,6 +56,7 @@ public class Startup
         app.UseEndpoints(endpoints =>
         {
             endpoints.MapControllers();
+            endpoints.MapSwagger();
         });
     }
 }

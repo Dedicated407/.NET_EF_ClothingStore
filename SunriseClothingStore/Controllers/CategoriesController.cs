@@ -18,7 +18,7 @@ public class CategoriesController : Controller
     [HttpGet]
     public ViewResult CategoryPage(QueryOptions options) => View(_categoryRepository.GetCategories(options));
 
-    
+    [ApiExplorerSettings(IgnoreApi=true)]
     public IActionResult EditCategory(Guid id)
     {
         ViewBag.EditId = id;
