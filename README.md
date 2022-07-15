@@ -17,4 +17,4 @@ In this project I used:
  - [Razor Pages](https://docs.microsoft.com/en-us/aspnet/core/razor-pages/?view=aspnetcore-6.0&tabs=visual-studio&viewFallbackFrom=aspnetcore-2.1);
  - [Bootstrap 5](https://getbootstrap.com/).
 ### For documenting APIs:
- - [Swagger] (https://www.nuget.org/packages/Swashbuckle.AspNetCore)
+ - [Swagger](https://www.nuget.org/packages/Swashbuckle.AspNetCore)
